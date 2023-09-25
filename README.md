@@ -1,7 +1,12 @@
 # Netflix GPT
 
-- Setup CRA + Tailwind css
-- Login + SignUp form
+- Setup Create react app
+- TailwindCss install
+- Routing with react-router-dom
+- Headers
+- Login Page
+- Sign Up page
+-
 
 # Features
 
