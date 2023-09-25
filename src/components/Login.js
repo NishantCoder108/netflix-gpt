@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import { loginValidation } from "../utils/validate";
+import Header from "./Header";
 
 const Login = () => {
   const [isSignIn, setIsSignIn] = useState(true);
@@ -27,16 +28,7 @@ const Login = () => {
 
   return (
     <div>
-      <div className="absolute  bg-gradient-to-b w-full  from-black to-transparent py-2 px-8 ">
-        <img className="w-52" src="netflix-logo.png" alt="netflix logo" />
-      </div>
-      <div className="h-[100vh]">
-        <img
-          className="w-full h-full inset-0 opacity-99"
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/f85718e8-fc6d-4954-bca0-f5eaf78e0842/ea44b42b-ba19-4f35-ad27-45090e34a897/IN-en-20230918-popsignuptwoweeks-perspective_alpha_website_large.jpg"
-          alt="home bg"
-        />
-      </div>
+      <Header />
       <div className="absolute inset-0 flex items-center justify-center ">
         <form
           onSubmit={(e) => e.preventDefault()}
@@ -47,6 +39,7 @@ const Login = () => {
           </h2>
           {!isSignIn && (
             <input
+              required
               ref={userName}
               className="py-3 px-2 my-3 w-full border bg-gray-700 border-none text-white rounded-md outline-slate-200 "
               placeholder="Full Name"
@@ -54,11 +47,13 @@ const Login = () => {
           )}
           <input
             ref={email}
+            required
             type="email"
             className="py-3 px-2 my-3 w-full border bg-gray-700 border-none text-white rounded-md outline-slate-200"
             placeholder="Email Address"
           />
           <input
+            required
             ref={password}
             type="password"
             className="pt-3 px-2 mt-3 w-full border bg-gray-700 border-none text-white rounded-md outline-slate-200"
