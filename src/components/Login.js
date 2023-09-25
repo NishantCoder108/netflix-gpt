@@ -1,6 +1,11 @@
 import React, { useRef, useState } from "react";
 import { loginValidation } from "../utils/validate";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import Header from "./Header";
+import { auth, getErrorMessageFromFirebaseErrorCode } from "../utils/firebase";
 
 const Login = () => {
   const [isSignIn, setIsSignIn] = useState(true);
@@ -12,14 +17,54 @@ const Login = () => {
 
   const handleSignIn = () => {
     const message = loginValidation(
-      email.current.value,
-      password.current.value,
-      userName.current.value
+      email.current?.value,
+      password.current?.value,
+      userName.current?.value
     );
 
-    console.log(userName, message);
-
     setErrorMessage(message);
+
+    if (message) return;
+
+    //TODO : Sign in && Sign up Logic
+
+    if (!isSignIn) {
+      createUserWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          console.log(user);
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+
+          setErrorMessage(errorCode + errorMessage);
+        });
+    } else {
+      signInWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          console.log("Signin ", user);
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          const customMess = getErrorMessageFromFirebaseErrorCode(errorCode);
+          console.log(error);
+          console.log(customMess);
+          setErrorMessage(customMess);
+        });
+    }
   };
 
   const toggleSignIn = () => {
@@ -33,9 +78,11 @@ const Login = () => {
         <form
           onSubmit={(e) => e.preventDefault()}
           className="w-[28rem] py-16 px-20 bg-black rounded-md bg-opacity-80"
+          autoComplete="off"
+          noValidate
         >
           <h2 className="py-2 text-white text-3xl">
-            {isSignIn ? "Sign In" : "Sign Up"}{" "}
+            {isSignIn ? "Sign In" : "Sign Up"}
           </h2>
           {!isSignIn && (
             <input
@@ -55,7 +102,7 @@ const Login = () => {
           <input
             required
             ref={password}
-            type="password"
+            type="text"
             className="py-3 px-2 mt-3 w-full border bg-gray-700 border-none text-white rounded-md outline-slate-200"
             placeholder="Password"
           />
