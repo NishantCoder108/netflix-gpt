@@ -7,9 +7,13 @@
 - Login Form
 - Sign Up Form
 - Form Validation
+- useRef
 - Firebase Setup
-- Firebase Authentication
--
+- Deploy on Production application
+- Create Signup form validation
+- Login Form validation with firebase
+- Setup Redux Store
+- Create userSlice with reduxjs/toolkit
 
 # Features
 
