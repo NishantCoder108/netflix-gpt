@@ -4,8 +4,11 @@
 - TailwindCss install
 - Routing with react-router-dom
 - Headers
-- Login Page
-- Sign Up page
+- Login Form
+- Sign Up Form
+- Form Validation
+- Firebase Setup
+- Firebase Authentication
 -
 
 # Features

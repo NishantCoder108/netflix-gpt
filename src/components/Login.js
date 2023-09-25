@@ -56,7 +56,7 @@ const Login = () => {
             required
             ref={password}
             type="password"
-            className="pt-3 px-2 mt-3 w-full border bg-gray-700 border-none text-white rounded-md outline-slate-200"
+            className="py-3 px-2 mt-3 w-full border bg-gray-700 border-none text-white rounded-md outline-slate-200"
             placeholder="Password"
           />
           <span className="text-gray-100 text-[.5rem]">
