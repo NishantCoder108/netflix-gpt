@@ -8,12 +8,13 @@ import {
 import Header from "./Header";
 import { auth, getErrorMessageFromFirebaseErrorCode } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { signInUser } from "../utils/userSlice";
 
 const Login = () => {
   const [isSignIn, setIsSignIn] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
+  const isUserLogin = useSelector((state) => state.user);
 
   const email = useRef(null);
   const password = useRef(null);
@@ -41,12 +42,13 @@ const Login = () => {
       )
         .then((userCredential) => {
           console.log({ userCredential });
-
-          updateProfile(auth.currentUser, {
+          const user = userCredential.user;
+          updateProfile(user, {
             displayName: userName.current?.value,
           })
             .then(() => {
               dispatch(signInUser(auth.currentUser));
+              navigate("/browse");
             })
             .catch((error) => {
               console.log(error);
@@ -57,7 +59,7 @@ const Login = () => {
           const errorCode = error.code;
           const customMessage = getErrorMessageFromFirebaseErrorCode(errorCode);
 
-          setErrorMessage(customMessage);
+          //   setErrorMessage(customMessage);
         });
     } else {
       signInWithEmailAndPassword(
@@ -67,15 +69,35 @@ const Login = () => {
       )
         .then((userCredential) => {
           console.log({ userCredential });
-          dispatch(signInUser(auth.currentUser));
+          const {
+            email,
+            displayName,
+            emailVerified,
+            photoURL,
+            phoneNumber,
+            uid,
+            accessToken,
+          } = userCredential.user;
+
+          dispatch(
+            signInUser({
+              email,
+              displayName,
+              emailVerified,
+              photoURL: photoURL || "https://github.com/NishantCoder108.png",
+              phoneNumber,
+              uid,
+              accessToken,
+            })
+          );
 
           navigate("/browse");
         })
         .catch((error) => {
-          const errorCode = error.code;
-          const customMessage = getErrorMessageFromFirebaseErrorCode(errorCode);
           console.log({ error });
-          setErrorMessage(customMessage);
+          //   const errorCode = error?.code;
+          //   const customMessage = getErrorMessageFromFirebaseErrorCode(errorCode);
+          //   setErrorMessage(customMessage);
         });
     }
   };
