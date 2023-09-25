@@ -32,18 +32,19 @@ const Login = () => {
       createUserWithEmailAndPassword(
         auth,
         email.current.value,
-        password.current.value
+        password.current.value,
+        userName.current.value
       )
         .then((userCredential) => {
-          // Signed in
           const user = userCredential.user;
           console.log(user);
         })
         .catch((error) => {
+          console.log({ error });
           const errorCode = error.code;
-          const errorMessage = error.message;
+          const customMessage = getErrorMessageFromFirebaseErrorCode(errorCode);
 
-          setErrorMessage(errorCode + errorMessage);
+          setErrorMessage(customMessage);
         });
     } else {
       signInWithEmailAndPassword(
@@ -58,11 +59,9 @@ const Login = () => {
         })
         .catch((error) => {
           const errorCode = error.code;
-          const errorMessage = error.message;
-          const customMess = getErrorMessageFromFirebaseErrorCode(errorCode);
-          console.log(error);
-          console.log(customMess);
-          setErrorMessage(customMess);
+          const customMessage = getErrorMessageFromFirebaseErrorCode(errorCode);
+          console.log({ error });
+          setErrorMessage(customMessage);
         });
     }
   };
