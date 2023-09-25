@@ -33,6 +33,8 @@ export const getErrorMessageFromFirebaseErrorCode = (errorCode) => {
       return "Invalid password.";
     case "auth/invalid-login-credentials":
       return "Invalid login credentials.";
+    case "auth/email-already-in-use":
+      return "Email already exist.";
     default:
       return "An unknown error occurred.";
   }

@@ -3,6 +3,7 @@ import { loginValidation } from "../utils/validate";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  updateProfile,
 } from "firebase/auth";
 import Header from "./Header";
 import { auth, getErrorMessageFromFirebaseErrorCode } from "../utils/firebase";
@@ -32,12 +33,13 @@ const Login = () => {
       createUserWithEmailAndPassword(
         auth,
         email.current.value,
-        password.current.value,
-        userName.current.value
+        password.current.value
       )
         .then((userCredential) => {
-          const user = userCredential.user;
-          console.log(user);
+          console.log({ userCredential });
+          updateProfile(auth.currentUser, {
+            displayName: userName.current?.value,
+          });
         })
         .catch((error) => {
           console.log({ error });
@@ -53,9 +55,7 @@ const Login = () => {
         password.current.value
       )
         .then((userCredential) => {
-          // Signed in
-          const user = userCredential.user;
-          console.log("Signin ", user);
+          console.log({ userCredential });
         })
         .catch((error) => {
           const errorCode = error.code;
