@@ -4,23 +4,23 @@ import Login from "./Login";
 import Browse from "./Browse";
 
 const Body = () => {
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Login />,
+    },
+
+    {
+      path: "/browse",
+      element: <Browse />,
+    },
+  ]);
+
   return (
     <>
       <RouterProvider router={router} />
     </>
   );
 };
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Login />,
-  },
-
-  {
-    path: "/browse",
-    element: <Browse />,
-  },
-]);
 
 export default Body;
