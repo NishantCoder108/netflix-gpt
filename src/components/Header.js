@@ -1,9 +1,9 @@
-import { signOut } from "firebase/auth";
-import React from "react";
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import React, { useEffect } from "react";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { logOutUser } from "../utils/userSlice";
+import { logOutUser, signInUser } from "../utils/userSlice";
 
 const Header = () => {
   const photoURL = useSelector((state) => state.user?.userDetails?.photoURL);
@@ -12,18 +12,53 @@ const Header = () => {
   );
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const handleLogOut = () => {
     signOut(auth)
-      .then(() => {
-        dispatch(logOutUser());
-
-        navigate("/");
-      })
+      .then(() => {})
       .catch((error) => {
         navigate("/error");
         console.log({ error });
       });
   };
+
+  useEffect(() => {
+    const unSubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        console.log("USER AUTH", { user });
+        const {
+          email,
+          displayName,
+          emailVerified,
+          photoURL,
+          phoneNumber,
+          uid,
+          accessToken,
+        } = user;
+
+        dispatch(
+          signInUser({
+            email,
+            displayName,
+            emailVerified,
+            photoURL,
+            phoneNumber,
+            uid,
+            accessToken,
+          })
+        );
+        navigate("/browse");
+      } else {
+        navigate("/");
+        dispatch(logOutUser());
+      }
+    });
+
+    return () => {
+      unSubscribe();
+    };
+  }, []);
+
   return (
     <div className="absolute w-full">
       <div className="flex justify-between bg-gradient-to-b   from-black to-transparent items-center py-2 px-8 ">

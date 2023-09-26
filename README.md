@@ -14,6 +14,8 @@
 - Login Form validation with firebase
 - Setup Redux Store
 - Create userSlice with reduxjs/toolkit
+- Bug : when we type in url "/" after login it will go to signUp /Sign In page vice versa
+- Dyanmically url is placed to single constant file
 
 # Features
 

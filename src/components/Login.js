@@ -7,9 +7,7 @@ import {
 } from "firebase/auth";
 import Header from "./Header";
 import { auth, getErrorMessageFromFirebaseErrorCode } from "../utils/firebase";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { signInUser } from "../utils/userSlice";
+import { AVATAR_URL } from "../utils/constants";
 
 const Login = () => {
   const [isSignIn, setIsSignIn] = useState(true);
@@ -18,9 +16,6 @@ const Login = () => {
   const email = useRef(null);
   const password = useRef(null);
   const userName = useRef(null);
-
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const handleSignIn = () => {
     const message = loginValidation(
@@ -44,33 +39,9 @@ const Login = () => {
           const user = userCredential.user;
           updateProfile(user, {
             displayName: userName.current?.value,
-            photoURL: "https://github.com/NishantCoder108.png",
+            photoURL: AVATAR_URL,
           })
-            .then(() => {
-              const {
-                email,
-                displayName,
-                emailVerified,
-                photoURL,
-                phoneNumber,
-                uid,
-                accessToken,
-              } = auth.currentUser;
-
-              dispatch(
-                signInUser({
-                  email,
-                  displayName,
-                  emailVerified,
-                  photoURL: photoURL,
-                  phoneNumber,
-                  uid,
-                  accessToken,
-                })
-              );
-
-              navigate("/browse");
-            })
+            .then(() => {})
             .catch((error) => {
               console.log(error);
             });
@@ -90,30 +61,6 @@ const Login = () => {
       )
         .then((userCredential) => {
           console.log({ userCredential });
-
-          const {
-            email,
-            displayName,
-            emailVerified,
-            photoURL,
-            phoneNumber,
-            uid,
-            accessToken,
-          } = auth.currentUser;
-
-          dispatch(
-            signInUser({
-              email,
-              displayName,
-              emailVerified,
-              photoURL,
-              phoneNumber,
-              uid,
-              accessToken,
-            })
-          );
-
-          navigate("/browse");
         })
         .catch((error) => {
           console.log({ error });
