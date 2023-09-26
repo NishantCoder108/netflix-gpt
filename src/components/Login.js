@@ -44,6 +44,7 @@ const Login = () => {
           const user = userCredential.user;
           updateProfile(user, {
             displayName: userName.current?.value,
+            photoURL: "https://github.com/NishantCoder108.png",
           })
             .then(() => {
               const {
@@ -61,8 +62,7 @@ const Login = () => {
                   email,
                   displayName,
                   emailVerified,
-                  photoURL:
-                    photoURL || "https://github.com/NishantCoder108.png",
+                  photoURL: photoURL,
                   phoneNumber,
                   uid,
                   accessToken,
@@ -90,6 +90,7 @@ const Login = () => {
       )
         .then((userCredential) => {
           console.log({ userCredential });
+
           const {
             email,
             displayName,
@@ -98,14 +99,14 @@ const Login = () => {
             phoneNumber,
             uid,
             accessToken,
-          } = userCredential.user;
+          } = auth.currentUser;
 
           dispatch(
             signInUser({
               email,
               displayName,
               emailVerified,
-              photoURL: photoURL || "https://github.com/NishantCoder108.png",
+              photoURL,
               phoneNumber,
               uid,
               accessToken,
@@ -133,7 +134,7 @@ const Login = () => {
       <div className="h-[100vh]">
         <img
           className="w-full h-full inset-0 opacity-99"
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/f85718e8-fc6d-4954-bca0-f5eaf78e0842/ea44b42b-ba19-4f35-ad27-45090e34a897/IN-en-20230918-popsignuptwoweeks-perspective_alpha_website_large.jpg"
+          src="netflix-home-bg.jpg"
           alt="home bg"
         />
       </div>

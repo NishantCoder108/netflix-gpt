@@ -7,7 +7,9 @@ import { logOutUser } from "../utils/userSlice";
 
 const Header = () => {
   const photoURL = useSelector((state) => state.user?.userDetails?.photoURL);
-  const uid = useSelector((state) => state.user?.userDetails?.uid);
+  const accessToken = useSelector(
+    (state) => state.user?.userDetails?.accessToken
+  );
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleLogOut = () => {
@@ -26,7 +28,7 @@ const Header = () => {
     <div className="absolute w-full">
       <div className="flex justify-between bg-gradient-to-b   from-black to-transparent items-center py-2 px-8 ">
         <img className="w-52" src="netflix-logo.png" alt="Netflix logo" />
-        {uid && (
+        {accessToken && (
           <div className="flex items-center">
             <img
               className="w-10"
