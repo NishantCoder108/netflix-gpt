@@ -60,7 +60,7 @@ const Header = () => {
   }, []);
 
   return (
-    <div className="absolute w-full">
+    <div className="absolute w-full z-10">
       <div className="flex justify-between bg-gradient-to-b   from-black to-transparent items-center py-2 px-8 ">
         <img className="w-52" src="netflix-logo.png" alt="Netflix logo" />
         {accessToken && (
@@ -71,7 +71,7 @@ const Header = () => {
               alt="Default User Logo"
             />
             <button
-              className="cursor-pointer py-3 px-6 hover:bg-slate-600"
+              className="cursor-pointer bg-slate-100  px-4  py-[.5rem]  hover:bg-slate-600 hover:text-white text-slate-600"
               onClick={handleLogOut}
             >
               Logout

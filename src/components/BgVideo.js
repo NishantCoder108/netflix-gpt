@@ -3,9 +3,8 @@ import { useSelector } from "react-redux";
 import useMovieVideo from "../hooks/useMovieVideo";
 import { YOUTUBE_EMBED_URL } from "../utils/constants";
 
-const BgVideo = () => {
-  const movie = useSelector((store) => store.movies.movies_list?.results[0]);
-  const videoList = useMovieVideo(movie?.id);
+const BgVideo = ({ movieId }) => {
+  const videoList = useMovieVideo(movieId);
 
   if (videoList.length === 0) return;
 
@@ -20,12 +19,12 @@ const BgVideo = () => {
     <div className="w-full aspect-video">
       <iframe
         width="100%"
-        height="100%"
+        height={"100%"}
         src={
           YOUTUBE_EMBED_URL +
           "/" +
           key +
-          "?autoplay=0&mute=1&controls=0&showinfo=0&loop=1"
+          "?autoplay=1&mute=1&controls=0&showinfo=0&loop=1"
         }
         frameBorder="0"
         allowFullScreen

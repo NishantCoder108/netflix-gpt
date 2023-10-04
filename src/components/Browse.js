@@ -4,7 +4,7 @@ import MainComponent from "./MainComponent";
 
 const Browse = () => {
   return (
-    <div>
+    <div className="relative">
       <Header />
       <MainComponent />
       {/**
