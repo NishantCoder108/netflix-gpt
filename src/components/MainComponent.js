@@ -6,9 +6,14 @@ import { useSelector } from "react-redux";
 
 const MainComponent = () => {
   useNowPlaying();
-  const movie = useSelector((store) => store.movies.movies_list?.results[0]);
+  const movie = useSelector((store) => store.movies.movies_list?.results?.[0]);
 
-  if (!movie) return "Loading...";
+  if (!movie)
+    return (
+      <div className=" absolute bg-gradient-to-r from-[#000000]   to-transparent-to inset-0 h-[98vw]   opacity-95] ">
+        Loading ...
+      </div>
+    );
 
   console.log({ movie });
   const { id, original_title, title, overview } = movie;

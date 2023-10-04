@@ -113,7 +113,7 @@ const Login = () => {
           <input
             required
             ref={password}
-            type="text"
+            type="password"
             className="py-3 px-2 mt-3 w-full border bg-gray-700 border-none text-white rounded-md outline-slate-200"
             placeholder="Password"
           />

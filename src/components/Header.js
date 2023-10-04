@@ -76,6 +76,7 @@ const Header = () => {
             >
               Logout
             </button>
+            <pre>{process.env.REACT_APP_ACCESS_KEY}</pre>
           </div>
         )}
       </div>

@@ -20,6 +20,10 @@
 - Custom Hooks created
 - TMDB Latest recommended movie api , Fetched
 - Bug : Fix bundler , inside node modulus
+- ENV file created
+- Secondary Component created
+- All credential move to .env
+- Deploy on Netlify
 
 # Features
 
