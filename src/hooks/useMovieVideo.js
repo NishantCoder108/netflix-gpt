@@ -12,12 +12,12 @@ const useMovieVideo = (movieId) => {
     const json = await data.json();
 
     console.log({ json });
-    setVideoList(json?.results);
+    setVideoList(json?.results || []);
   };
 
   useEffect(() => {
     fetchMovieVideo();
-  }, []);
+  }, [movieId]);
 
   return videoList;
 };

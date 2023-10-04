@@ -8,11 +8,7 @@ const Browse = () => {
       <Header />
       <MainComponent />
       {/**
-       *
-       * MainComponent
-       *   - Bg video ,loop ,mute
-       *   - title
-       *
+
        * SecondaryComponent
        *     Card
        *        :hover--> video will be going on| width and height size will increase

@@ -16,6 +16,10 @@
 - Create userSlice with reduxjs/toolkit
 - Bug : when we type in url "/" after login it will go to signUp /Sign In page vice versa
 - Dyanmically url is placed to single constant file
+- Main Component Creted
+- Custom Hooks created
+- TMDB Latest recommended movie api , Fetched
+- Bug : Fix bundler , inside node modulus
 
 # Features
 
